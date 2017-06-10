@@ -7,7 +7,7 @@ def event_handler(ms, window):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             window.exit_debug_info(window)
-            print(window.time, len(window.frame_hist), sys.getsizeof(window.frame_hist))
+
             sys.exit()
 
 

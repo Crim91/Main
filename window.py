@@ -38,7 +38,10 @@ def exit_debug_info(game_win):
     len_framehist = len(game_win.frame_hist)
     for i in range(len_framehist):
         sum += game_win.frame_hist[i][2]
-    print(sum / len_framehist)
+    print("AVG FPS: ", sum / len_framehist)
+    print("Total time (s): ", time / 1000)
+    print("Frames: ", len(frame_hist))
+    print("Memory used for frame hist (bytes): ", sys.getsizeof(frame_hist))
 
 def clear():
     pass
