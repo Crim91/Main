@@ -8,6 +8,7 @@ import player
 
 
 ms = input.Mouse()
+kb = input.Keyboard()
 main_player = player.Player(window)
 
 
@@ -18,7 +19,7 @@ def game():
 
 while True:
     ms.update()
-    input.event_handler(ms, window)
+    input.event_handler(ms, kb,  window)
     game()
     window.frame_handler()
     debug.legend_handler(window)
