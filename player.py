@@ -2,7 +2,9 @@ import sys
 import pygame
 
 
+
 class Player():
+    all_players = []
     init_rad = 10
     interaction_dict = {}
     def_background = (0, 0, 0)
@@ -10,6 +12,7 @@ class Player():
 
 
     def __init__(self, window):
+        Player.all_players.append(self)
         self.rad = Player.init_rad
         screen_center = (window.main_surf.get_size()[0] / 2, window.main_surf.get_size()[1] / 2)
         self.pos = screen_center
@@ -25,3 +28,7 @@ class Player():
 
     def draw(self,win):
         win.main_surf.blit(self.surface, self.pos)
+
+    def event_handler(self, event):
+        if event.type == pygame.KEYDOWN:
+            print('Players gotta do things!')
