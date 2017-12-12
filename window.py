@@ -5,10 +5,11 @@ import sys
 
 pygame.init()
 font = pygame.font.SysFont("calibri", 15)
-main_surf = pygame.display.set_mode((700,400))
+screen_size = (1920, 1200)
+main_surf = pygame.display.set_mode(screen_size,FULLSCREEN|HWSURFACE)
 frame = 0
 time = 0
-frame_time = 0
+dt = 0
 fps = 0
 frame_hist = []
 game_clock = pygame.time.Clock()
@@ -22,14 +23,14 @@ def update():
 def frame_handler():
     global frame
     global time
-    global frame_time
+    global dt
     global frame_hist
     global game_clock
     global fps
-    frame_time = game_clock.tick()
-    time += frame_time
+    dt = game_clock.tick()
+    time += dt
     fps = game_clock.get_fps()
-    frame_hist.append([frame,frame_time, fps, time])
+    frame_hist.append([frame, dt, fps, time])
     frame += 1
 
 # Prints frame info when the main proess exits
@@ -42,6 +43,9 @@ def exit_debug_info(game_win):
     print("Total time (s): ", time / 1000)
     print("Frames: ", len(frame_hist))
     print("Memory used for frame hist (bytes): ", sys.getsizeof(frame_hist))
+
+def screen_pos(object_pos):
+    return [object_pos[0], screen_size[1]-object_pos[1]]
 
 def clear():
     pass

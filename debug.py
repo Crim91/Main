@@ -13,7 +13,7 @@ def mouse_pos_draw(window,ms):
 
 
 def legend_draw(window):
-    frame_time = window.font.render(f"frame time: {window.frame_time}ms", 1, legend_font_color)
+    frame_time = window.font.render(f"frame time: {window.dt}ms", 1, legend_font_color)
     fps = window.font.render(f"fps: {window.fps:8.0f}", 1, legend_font_color)
     legend_surf.blit(frame_time, (0, 0))
     legend_surf.blit(fps, (0, 13))

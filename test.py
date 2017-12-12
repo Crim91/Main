@@ -15,6 +15,7 @@ main_player = player.Player(window)
 def game():
     debug.mouse_pos_draw(window, ms)
     main_player.draw(window)
+    main_player.integrate(window.dt)
     window.update()
 
 while True:

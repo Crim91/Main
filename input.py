@@ -3,6 +3,8 @@ from pygame.locals import *
 import sys
 import player
 
+key_name = pygame.key.name
+curr_keys = []
 
 def end_game(window):
     window.exit_debug_info(window)
@@ -11,19 +13,34 @@ def end_game(window):
 def event_handler(ms, kb, window):
     all_events = pygame.event.get()
     for event in all_events:
-        # Key is pressed or let go
-        if event.type in [pygame.KEYDOWN, pygame.KEYUP]:
-            print(pygame.key.name(event.key))
-            # end game if escape key is pressed
+        # Key is pressed
+        if event.type == pygame.KEYDOWN:
             if pygame.key.name(event.key) == 'escape':
                 end_game(window)
-        elif event.type in [pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP]:
+            key = key_name(event.key)
+            curr_keys.append(key)
+            print(curr_keys)
+
+        # Key is let go
+        elif event.type == pygame.KEYUP:
+            key = key_name(event.key)
+            curr_keys.remove(key)
+            print(curr_keys)
+
+        elif event.type == pygame.MOUSEBUTTONDOWN:
             print(event.button, event.pos)
-        for plyr in player.Player.all_players:
-            plyr.event_handler(event)
+
+        elif event.type == pygame.MOUSEBUTTONUP:
+            print(event.button, event.pos)
+
+
         # end game if close button is clicked
         if event.type == pygame.QUIT:
             end_game(window)
+
+    for plyr in player.Player.all_players:
+        if len(curr_keys) > 0:
+            plyr.event_handler(curr_keys, ms.current_pos())
 
 class Keyboard():
     def __init__(self):
