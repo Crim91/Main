@@ -5,8 +5,8 @@ import sys
 
 pygame.init()
 font = pygame.font.SysFont("calibri", 15)
-screen_size = (1920, 1200)
-main_surf = pygame.display.set_mode(screen_size,FULLSCREEN|HWSURFACE)
+screen_size = (800, 600)
+main_surf = pygame.display.set_mode(screen_size,HWSURFACE)
 frame = 0
 time = 0
 dt = 0
